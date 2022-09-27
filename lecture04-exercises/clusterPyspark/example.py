@@ -9,7 +9,7 @@ sc = SparkContext(master='spark://spark-master:7077', appName='myAppName', conf=
 # Filter function
 select_words = lambda s : s[1] > 400
 
-files = "hdfs://namenode:9000/txt/"
+files = "hdfs://namenode:9000/stream-in/"
 # Read in all files in the directory
 txtFiles = sc.wholeTextFiles(files, 20)
 # Take the content of the files and split them
@@ -25,3 +25,15 @@ top_words.saveAsTextFile('hdfs://namenode:9000/txt-out')
 # Collect to a Python list and print
 print(top_words.collect())
 
+"""
+Output:
+
+('in', 406)
+('said', 416)
+('she', 485)
+('of', 605)
+('a', 667)
+('to', 778)
+('and', 783)
+('the', 1683)
+"""
